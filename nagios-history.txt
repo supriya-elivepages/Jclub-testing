@@ -1,0 +1,477 @@
+    1  ls
+    2  poweroff 
+    3  yum list all
+    4  ifconfig 
+    5  /etc/init.d/network restart
+    6  ifconfig eth0
+    7  setup
+    8  /etc/init.d/network restart
+    9  ifconfig eth0
+   10  vim /etc/sysconfig/network-scripts/ifcfg-eth0 
+   11  reboot 
+   12  ifconfig 
+   13  rpm -qa | grep httpd php
+   14  rpm -qa | grep httpd 
+   15  rpm -qa | grep php
+   16  rpm -qa | grep gcc
+   17  rpm -qa | grep glibc
+   18  rpm -qa | grep glibc-common
+   19  rpm -qa | grep gd
+   20  rpm -qa | grep gd-devel
+   21  rpm -qa | grep make
+   22  rpm -qa | grep net-snmp
+   23  yum install gd-devel
+   24  cd /etc/yum.repos.d/
+   25  wget http://packages.sw.be/rpmforge-release/rpmforge-release-0.5.2-2.el6.rf.x86_64.rpm
+   26  rpm -Uvh rpmforge-release-0.5.2-2.el6.rf.x86_64.rpm
+   27  cd
+   28  yum install gd-devel
+   29  useradd nagios
+   30  passwd nagios
+   31  groupadd nagcmd
+   32  /usr/sbin/usermod -a -G nagcmd nagios
+   33  /usr/sbin/usermod -a -G nagcmd apache
+   34  cd Downloads/
+   35  wget http://prdownloads.sourceforge.net/sourceforge/nagios/nagios-4.0.1.tar.gz
+   36  wget https://www.nagios-plugins.org/download/nagios-plugins-1.5.tar.gz
+   37  ls
+   38  tar -zxvf nagios-4.0.1.tar.gz 
+   39  ls
+   40  tar -zxvf nagios-plugins-1.5.tar.gz 
+   41  ls
+   42  cd nagios-4.0.1
+   43  ./configure --with-command-group=nagcmd
+   44  echo $?
+   45  make all
+   46  echo $?
+   47  make install
+   48  make install-init
+   49  echo $?
+   50  make install-commandmode
+   51  echo $?
+   52  make install-config
+   53  echo $?
+   54  vim /usr/local/nagios/etc/objects/contacts.cfg 
+   55  make install-webconf
+   56  echo $?
+   57  htpasswd -s -c /usr/local/nagios/etc/htpasswd.users nagiosadmin
+   58  /etc/init.d/httpd restart
+   59  vim /etc/hosts
+   60  httpd -t
+   61  httpd -S
+   62  hostname nagios.lpipl.com
+   63  httpd -t
+   64  /etc/init.d/httpd restart
+   65  tailf /var/log/httpd/access_log 
+   66  tailf /var/log/messages 
+   67  tailf /var/log/httpd/error_log 
+   68  sestatus 
+   69  vim /etc/sysconfig/selinux 
+   70  vim /etc/sysconfig/network
+   71  setenforce 0
+   72  /etc/init.d/httpd restart
+   73  pwd
+   74  cd ..
+   75  cd nagios-plugins-1.5
+   76  ./configure --with-nagios-user=nagios --with-nagios-group=nagios
+   77  echo $?
+   78  make
+   79  echo $?
+   80  make install
+   81  echo $?
+   82  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+   83  echo $?
+   84  chkconfig --add nagios
+   85  chkconfig --level 35 nagios 
+   86  chkconfig --level 35 nagios on
+   87  chkconfig --add httpd
+   88  chkconfig --level 35 httpd on
+   89  service nagios start
+   90  iptables -L
+   91  iptables -F
+   92  ls
+   93  history 
+   94  netstat -at | grep nrpe
+   95  /etc/init.d/nagios status
+   96  /usr/local/nagios/libexec/check_nrpe -H localhost
+   97  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+   98  updatedb 
+   99  locate check_nrpe
+  100  rpm -qa | grep open
+  101  df -h
+  102  cd /media/RHEL_6.0\ x86_64\ Disc\ 1/
+  103  ls
+  104  ll Packages/
+  105  ll Server/
+  106  cp -avr Packages/ /var/ftp/pub/
+  107  echo $?
+  108  rpm -qa | grep createrepo
+  109  cd
+  110  createrepo -v /var/ftp/pub/Packages/
+  111  echo $?
+  112  /etc/init.d/vsftpd restart
+  113  uname -a
+  114  history > nagios-installation.txt
+  115  /usr/local/nagios/libexec/check_nrpe -H localhost
+  116  cd /usr/local/nagios/etc/
+  117  pwd
+  118  ls
+  119  touch hosts.cfg
+  120  touch services.cfg
+  121  vi /usr/local/nagios/etc/nagios.cfg
+  122  vi /usr/local/nagios/etc/hosts.cfg
+  123  vi /usr/local/nagios/etc/services.cfg
+  124  vi /usr/local/nagios/etc/objects/commands.cfg
+  125  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg/usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  126  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  127  vi /usr/local/nagios/etc/services.cfg
+  128  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  129  service nagios restart
+  130  /usr/local/nagios/libexec/check_nrpe -H 192.168.1.51
+  131  cd
+  132  ls
+  133  cd Downloads/
+  134  ls
+  135  wget http://garr.dl.sourceforge.net/project/nagios/nrpe-2.x/nrpe-2.15/nrpe-2.15.tar.gz
+  136  tar xzf nrpe-2.15.tar.gz
+  137  cd nrpe-2.15
+  138  ./configure.
+  139  ./configure
+  140  echo $?
+  141  make all
+  142  echo $?
+  143  make install-daemon
+  144  echo $?
+  145  /usr/local/nagios/libexec/check_nrpe -H 192.168.1.51
+  146  updatedb 
+  147  locate check_nrpe
+  148  ll /usr/local/nagios/libexec/
+  149  ls
+  150  locate check_nrpe
+  151  cp src/check_nrpe* /usr/local/nagios/libexec/
+  152  /usr/local/nagios/libexec/check_nrpe -H 192.168.1.51
+  153  iptables -A INPUT -p tcp -m tcp --dport 5666 -j ACCEPT
+  154  /usr/local/nagios/libexec/check_nrpe -H 192.168.1.51
+  155  /usr/local/nagios/libexec/check_nrpe -H 192.168.1.8
+  156  vi /usr/local/nagios/etc/hosts.cfg
+  157  vi /usr/local/nagios/etc/services.cfg 
+  158  service nagios restart
+  159  /usr/local/nagios/libexec/check_nrpe -H 192.168.1.51
+  160  /usr/local/nagios/libexec/check_nrpe -H 192.168.1.8
+  161  vi /usr/local/nagios/etc/services.cfg 
+  162  tailf /var/log/messages
+  163  sestatus 
+  164  setenforce 0
+  165  sestatus 
+  166  locate nrpe_local.cfg
+  167  cd /etc/
+  168  cd /usr/
+  169   grep -rli check_mycommand . 
+  170  cd /usr/local/nagios/
+  171  ls
+  172  cd etc/
+  173  ls
+  174  cd objects/
+  175  ls
+  176  vim commands.cfg 
+  177  /usr/local/nagios/libexec/check_ftp -H 192.168.1.8
+  178  /usr/local/nagios/libexec/check_ssh -H 192.168.1.8
+  179  /usr/local/nagios/libexec/check_http -H 192.168.1.8
+  180  cd ..
+  181  vim services.cfg 
+  182  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  183  service nagios restart
+  184  /bin/sh -x ./check_nginx.sh -H localhost -P 80 -p /var/run -n nginx.pid -w 5000 -c 10000
+  185  ls
+  186  vim services.cfg 
+  187  service nagios restart
+  188  cd
+  189  vim /etc/hosts
+  190  /bin/sh -x ./check_nginx.sh -H test.lpipl.com -P 80 -p /var/run -n nginx.pid -w 5000 -c 10000
+  191  history 
+  192  vim /usr/local/nagios/etc/services.cfg
+  193  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  194  cd /usr/local/nagios/libexec/
+  195  scp 192.168.1.8:/root/check_nginx .
+  196  cd
+  197  /usr/local/nagios/libexec/check_nginx -H 192.168.1.8
+  198  vim /usr/local/nagios/etc/services.cfg
+  199  service nagios restart
+  200  vim /usr/local/nagios/etc/services.cfg
+  201  ls
+  202  cd /usr/local/nagios/
+  203  ls
+  204  cd etc/
+  205  ls
+  206  ll objects/
+  207  cd objects/
+  208  ls
+  209  vim contacts.cfg 
+  210  tailf /var/log/messages
+  211  chkconfig --list nagios
+  212  reboot 
+  213  locate nrpe
+  214  /usr/local/nagios/bin/nrpe -c
+  215  /etc/init.d/httpd restart
+  216  ifconfig eth0
+  217  /etc/init.d/nagios stop
+  218  vim /usr/local/nagios/etc/services.cfg
+  219  /etc/init.d/nagios stop
+  220  vim /usr/local/nagios/etc/services.cfg
+  221  vim /usr/local/nagios/etc/hosts.cfg 
+  222  history 
+  223  /bin/sh -x ./check_nginx.sh -H test.lpipl.com -P 80 -p /var/run -n nginx.pid -w 5000 -c 10000
+  224  ls
+  225  locate nginx
+  226  /usr/local/nagios/libexec/check_nginx -H test.lpipl.com -P 80 -p /var/run -n nginx.pid -w 5000 -c 10000
+  227  ping test.lpipl.com
+  228  vim /usr/local/nagios/etc/services.cfg
+  229  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg/usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  230  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  231  /etc/init.d/nagios restart
+  232  /etc/init.d/httpd status
+  233  ifconfig eth0
+  234  /etc/init.d/httpd restart
+  235  iptables -L
+  236  iptables -F
+  237  history | grep check_ftp
+  238  /usr/local/nagios/libexec/check_ftp -H 192.168.1.8
+  239  /usr/local/nagios/libexec/check_nrpe -H localhost -c check_total_procs
+  240  history | grep check_ftp
+  241   /usr/local/nagios/libexec/check_ftp -H 192.168.1.8
+  242  /usr/local/nagios/libexec/check_nrpe -H localhost -c check_ftp
+  243  /usr/local/nagios/libexec/check_nrpe -H 192.168.1.8 -c check_ftp
+  244  /etc/init.d/nagios stop
+  245  /usr/local/nagios/libexec/check_nrpe -H localhost -c check_ftp
+  246  /usr/local/nagios/libexec/check_nrpe -H 192.168.1.8 -c check_ftp
+  247  /usr/local/nagios/libexec/check_nrpe -H localhost -c check_ftp
+  248  /usr/local/nagios/libexec/check_nrpe -H 192.168.1.8 -c check_ftp
+  249  /usr/local/nagios/libexec/check_nrpe -H localhost -c check_ftp
+  250  /usr/local/nagios/libexec/check_nrpe -H 192.168.1.8 -c check_ftp
+  251  /etc/init.d/nagios restart
+  252  date
+  253  cd /usr/local/nagios/etc/
+  254  ls
+  255  ll objects/
+  256  vim objects/commands.cfg 
+  257  ls
+  258  cd objects/
+  259  ls
+  260  vim contacts.cfg 
+  261  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  262  vim contacts.cfg 
+  263  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  264  vim contacts.cfg 
+  265  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  266  vim contacts.cfg 
+  267  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  268  ls
+  269  vim serviceescalation.cfg
+  270  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  271  vim contacts.cfg 
+  272  ls
+  273  cat templates.cfg 
+  274  vim templates.cfg 
+  275  vim contacts.cfg 
+  276  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  277  vim contacts.cfg 
+  278  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  279  vim contacts.cfg 
+  280  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  281  vim contacts.cfg 
+  282  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  283  vim contacts.cfg 
+  284  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  285  vim contacts.cfg 
+  286  cd ..
+  287  grep -rli nagiosadmin .
+  288  vim cgi.cfg 
+  289  vim contacts.cfg 
+  290  cd -
+  291  vim contacts.cfg 
+  292  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  293  vim contacts.cfg 
+  294  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  295  vim serviceescalation.cfg
+  296  vim contacts.cfg 
+  297  vim serviceescalation.cfg
+  298  vim contacts.cfg 
+  299  vim serviceescalation.cfg
+  300  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  301  /etc/init.d/nagios restart
+  302  vim serviceescalation.cfg
+  303  /etc/init.d/nagios restart
+  304  cat serviceescalation.cfg
+  305  vim contacts.cfg 
+  306  cp contacts.cfg contacts.cfg.org
+  307  vim contacts.cfg 
+  308  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  309  vim localhost.cfg 
+  310  ls
+  311  vim localhost.cfg 
+  312  grep -rli admins .
+  313  cd ..
+  314  ls
+  315  vim hosts.cfg 
+  316  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  317  vim hosts.cfg 
+  318  vim services.cfg 
+  319  grep -rli admins .
+  320  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  321  vim hosts.cfg 
+  322  vim services.cfg 
+  323  vim hosts.cfg 
+  324  cd objects/
+  325  ls
+  326  cp contacts.cfg.org contacts.cfg
+  327  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  328  /etc/init.d/nagios stop
+  329  /etc/init.d/sendmail status
+  330  ls
+  331  cd ..
+  332  ls
+  333  cd ..
+  334  ls
+  335  vim /etc/init.d/nagios 
+  336  ls
+  337  cd etc/
+  338  ls
+  339  vim nagios.cfg 
+  340  cd objects/
+  341  ll
+  342  chown nagios.nagios serviceescalation.cfg
+  343  cd ..
+  344  vim nagios.cfg 
+  345  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  346  ls
+  347  vim hosts.cfg 
+  348  vim objects/serviceescalation.cfg 
+  349  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  350  vim hosts.cfg 
+  351  vim objects/serviceescalation.cfg 
+  352  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  353  vim objects/serviceescalation.cfg 
+  354  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  355  vim objects/serviceescalation.cfg 
+  356  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  357  vim hosts.cfg 
+  358  /etc/init.d/nagios status
+  359  ls
+  360  vim cgi.cfg 
+  361  cd objects/
+  362  ls
+  363  vim contacts.cfg
+  364  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  365  vim ../nagios.cfg 
+  366  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  367  cd ..
+  368  vim services.cfg 
+  369  vim objects/serviceescalation.cfg 
+  370  vim contacts.cfg
+  371  vim ../contacts.cfg
+  372  pwd
+  373  ls
+  374  cd objects/
+  375  ls
+  376  vim contacts.cfg
+  377  vim serviceescalation.cfg 
+  378  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  379  vim ../nagios.cfg 
+  380  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  381  vim serviceescalation.cfg 
+  382  vim contacts.cfg
+  383  vim serviceescalation.cfg 
+  384  vim contacts.cfg
+  385  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  386  vim contacts.cfg
+  387  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  388  vim contacts.cfg
+  389  vim contacts.cfg.org 
+  390  vim serviceescalation.cfg 
+  391  vim contacts.cfg.org 
+  392  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  393  cp contacts.cfg contacts.cfg.new
+  394  cp contacts.cfg.org contacts.cfg
+  395  vim contacts.cfg.org 
+  396  vim serviceescalation.cfg 
+  397  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  398  vim contacts.cfg
+  399  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  400  vim contacts.cfg
+  401  vim serviceescalation.cfg 
+  402  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  403  vim serviceescalation.cfg 
+  404  cd ..
+  405  vim nagios.cfg 
+  406  /etc/init.d/nagios start
+  407  tailf /var/log/maillog
+  408  grep pramod /var/log/maillog
+  409  /etc/init.d/nagios stop
+  410  vim objects/serviceescalation.cfg 
+  411  /etc/init.d/nagios start
+  412  tailf /var/log/maillog
+  413  vim objects/contacts.cfg
+  414  tailf /var/log/maillog
+  415  /etc/init.d/nagios stop
+  416  tail -n 50 /var/log/maillog
+  417  /etc/init.d/sendmail statis
+  418  /etc/init.d/sendmail status
+  419  cat /etc/resolv.conf
+  420  mail -q
+  421  mailq
+  422  vim /etc/resolv.conf
+  423  /etc/init.d/nagios start
+  424  tailf /var/log/maillog
+  425  date
+  426  /etc/init.d/nagios stop
+  427  vim /etc/resolv.conf
+  428  iptables -L
+  429  /etc/init.d/iptables save
+  430  restart
+  431  reboot ; exit
+  432  /etc/init.d/nagios status
+  433  /etc/init.d/sendmail status
+  434  mail -v supriya@elivepages.com
+  435  tailf /var/log/maillog
+  436  /usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg
+  437  /etc/init.d/nagios stop
+  438  tailf /var/log/maillog
+  439  mail -v supriyaworlikar@yahoo.co.in
+  440  tailf /var/log/maillog
+  441  exit
+  442  /etc/init.d/nagios status
+  443  /etc/init.d/nagios start
+  444  /etc/init.d/nagios stop
+  445  cd /opt/
+  446  ls
+  447  rpm -Uvh http://download.newrelic.com/pub/newrelic/el5/i386/newrelic-repo-5-3.noarch.rpm
+  448  yum install newrelic-sysmond
+  449  echo $?
+  450  /etc/init.d/newrelic-sysmond start
+  451  nrsysmond-config --set license_key=f4e2ac02d2a9e0207b9b225729cbcee5d0b02801
+  452  echo $?
+  453  /etc/init.d/newrelic-sysmond start
+  454  ll /var/log/newrelic/nrsysmond.log
+  455  tailf /var/log/newrelic/nrsysmond.log
+  456  /etc/init.d/newrelic-sysmond restart
+  457  /etc/init.d/httpd restart
+  458  chkconfig nagios off
+  459  reboot ;exit
+  460  /etc/init.d/vsftpd restart
+  461  ls
+  462  cd /var/www/html/
+  463  ls
+  464  cd
+  465  java -version
+  466  yum update java
+  467  cat .ssh/known_hosts 
+  468  ssh-keygen --helo
+  469  ssh-keygen --help
+  470  man ssh-keygen
+  471  ssh-keygen -t rsa -C "supriya@elivepages.com"
+  472  cat /etc/passwd
+  473  useradd supriya
+  474  passwd supriya
+  475  su - supriya
+  476  ls
+  477  history > nagios-history.txt
